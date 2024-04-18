@@ -129,8 +129,6 @@ To use the Voice Controlled Robot code:
 
 ### Obstacle Avoiding Robot
 
-Sure, here's a Git README file for the Obstacle Avoiding Robot project:
-
 ---
 
 # Obstacle Avoiding Robot (Arduino)
