@@ -1,0 +1,73 @@
+#include <AFMotor.h>
+
+String command;
+
+AF_DCMotor motor1(1, MOTOR12_1KHZ);
+AF_DCMotor motor2(2, MOTOR12_1KHZ);
+AF_DCMotor motor3(3, MOTOR34_1KHZ);
+AF_DCMotor motor4(4, MOTOR34_1KHZ);
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  delay(10);
+  while (Serial.available()) {
+    command = Serial.readString();
+    Serial.print(command);
+  }
+  
+  if (command == "*move forward#") {
+    forward();
+  } else if (command == "*move backward#") {
+    backward();
+  } else if (command == "*turn left#") {
+    left();
+  } else if (command == "*turn right#") {
+    right();
+  } else if (command == "*stop#") {
+    stopMotors();
+  }
+  
+  command = "";
+}
+
+void forward() {
+  setMotorsSpeed(255, FORWARD);
+  delay(1500);
+  stopMotors();
+}
+
+void backward() {
+  setMotorsSpeed(255, BACKWARD);
+  delay(1500);
+  stopMotors();
+}
+
+void right() {
+  setMotorsSpeed(255, FORWARD, BACKWARD);
+  delay(500);
+  stopMotors();
+}
+
+void left() {
+  setMotorsSpeed(255, BACKWARD, FORWARD);
+  delay(500);
+  stopMotors();
+}
+
+void stopMotors() {
+  setMotorsSpeed(0);
+}
+
+void setMotorsSpeed(int speed, int direction1 = RELEASE, int direction2 = RELEASE) {
+  motor1.setSpeed(speed);
+  motor1.run(direction1);
+  motor2.setSpeed(speed);
+  motor2.run(direction1);
+  motor3.setSpeed(speed);
+  motor3.run(direction2);
+  motor4.setSpeed(speed);
+  motor4.run(direction2);
+}
