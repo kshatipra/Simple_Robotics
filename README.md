@@ -190,6 +190,5 @@ Contributions to this repository are welcome. If you have improvements to the ex
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
+This project is licensed under the  Apache License.
 ---
